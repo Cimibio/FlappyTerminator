@@ -3,11 +3,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class TerminatorMover : MonoBehaviour
 {
-    [SerializeField] private float _tapForce;
-    [SerializeField] private float _speed;
-    [SerializeField] private float _rotationSpeed;
-    [SerializeField] private float _maxRotationZ;
-    [SerializeField] private float _minRotationZ;
+    [SerializeField] private float _tapForce = 4;
+    [SerializeField] private float _speed = 2.5f;
+    [SerializeField] private float _rotationSpeed = 1;
+    [SerializeField] private float _maxRotationZ = 35;
+    [SerializeField] private float _minRotationZ = -60;
 
     private Vector3 _startPosition;
     private Rigidbody2D _rigidbody2D;

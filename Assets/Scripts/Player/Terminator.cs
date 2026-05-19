@@ -1,32 +1,34 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(TerminatorMover))]
-[RequireComponent(typeof(ScoreCounter))]
+[RequireComponent(typeof(TerminatorMover), typeof(ScoreCounter))]
+[RequireComponent(typeof(InputReader))]
 [RequireComponent(typeof(TerminatorCollisionDetector))]
 public class Terminator : MonoBehaviour
 {
-    private TerminatorMover _birdMover;
+    private TerminatorMover _mover;
     private ScoreCounter _scoreCounter;
-    private TerminatorCollisionDetector _handler;
+    private TerminatorCollisionDetector _collisionDetector;
+    private InputReader _inputReader;
 
     public event Action GameOver;
 
     private void Awake()
     {
         _scoreCounter = GetComponent<ScoreCounter>();
-        _handler = GetComponent<TerminatorCollisionDetector>();
-        _birdMover = GetComponent<TerminatorMover>();
+        _collisionDetector = GetComponent<TerminatorCollisionDetector>();
+        _mover = GetComponent<TerminatorMover>();
+        _inputReader = GetComponent<InputReader>();
     }
 
     private void OnEnable()
     {
-        _handler.CollisionDetected += ProcessCollision;
+        _collisionDetector.CollisionDetected += ProcessCollision;
     }
 
     private void OnDisable()
     {
-        _handler.CollisionDetected -= ProcessCollision;
+        _collisionDetector.CollisionDetected -= ProcessCollision;
     }
 
     private void ProcessCollision(IInteractable interactable)
@@ -45,6 +47,6 @@ public class Terminator : MonoBehaviour
     public void Reset()
     {
         _scoreCounter.Reset();
-        _birdMover.Reset();
+        _mover.Reset();
     }
 }
