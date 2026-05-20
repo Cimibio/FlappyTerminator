@@ -7,8 +7,8 @@ public class ProjectileMover : MonoBehaviour
 
     private void Update()
     {
-        if (_isMoving)        
-            transform.Translate(_velocity * Time.deltaTime);        
+        if (_isMoving)
+            transform.Translate(_velocity * Time.deltaTime);
     }
 
     public void SetDirection(Vector2 direction)

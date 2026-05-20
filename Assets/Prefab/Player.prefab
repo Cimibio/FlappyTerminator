@@ -184,7 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tapForce: 4
   _speed: 2.5
-  _rotationSpeed: 0.5
+  _rotationSpeed: 1
   _maxRotationZ: 35
   _minRotationZ: -35
 --- !u!114 &6137073516625720559

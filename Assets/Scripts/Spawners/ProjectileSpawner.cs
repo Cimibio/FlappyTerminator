@@ -9,9 +9,9 @@ public class ProjectileSpawner : Spawner<Projectile>
 
     private Shooter _shooter;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         _shooter = GetComponent<Shooter>();
     }
 
@@ -34,10 +34,6 @@ public class ProjectileSpawner : Spawner<Projectile>
     protected override void Despawn(Projectile projectile)
     {
         projectile.Died -= OnProjectileDied;
-
-        ProjectileMover mover = projectile.GetComponent<ProjectileMover>();
-        mover.ResetMovement();
-
         base.Despawn(projectile);
     }
 
@@ -47,8 +43,7 @@ public class ProjectileSpawner : Spawner<Projectile>
         projectile.transform.position = _firePoint.position;
 
         Vector2 direction = _firePoint.right;
-        ProjectileMover mover = projectile.GetComponent<ProjectileMover>();
-        mover.SetDirection(direction * _projectileSpeed);
+        projectile.Init(direction, _projectileSpeed);
     }
 
     private void OnProjectileDied(Projectile projectile)
