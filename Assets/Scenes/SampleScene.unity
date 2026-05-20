@@ -122,50 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &141521943
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 141521945}
-  - component: {fileID: 141521944}
-  m_Layer: 7
-  m_Name: rocket
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &141521944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 141521943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9262148d244ab4a43a71b24a07d95245, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &141521945
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 141521943}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.443022, y: 0.001414679, z: 0.1959237}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &251859733
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,7 +704,7 @@ MonoBehaviour:
   _prefab: {fileID: 4538906268113617128, guid: 136a9f5be5f348f45b8606651e03e03c, type: 3}
   _poolCapacity: 20
   _poolMaxSize: 20
-  _repeatRate: 1
+  _repeatRate: 4
   _deltaSpawnAreaOffset: 3.5
 --- !u!114 &1216162872 stripped
 MonoBehaviour:
@@ -1457,5 +1413,4 @@ SceneRoots:
   - {fileID: 384389505}
   - {fileID: 1879254870}
   - {fileID: 499193619}
-  - {fileID: 141521945}
   - {fileID: 1982754064}

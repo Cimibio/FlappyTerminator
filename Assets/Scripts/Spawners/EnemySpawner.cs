@@ -26,7 +26,6 @@ public class EnemySpawner : Spawner<Enemy>
         enemy.transform.position = GetRandomSpawnPoint();
 
         base.Spawn(enemy);
-        enemy.Init();
 
         enemy.Died += Remove;
     }

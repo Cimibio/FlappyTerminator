@@ -45,6 +45,9 @@ GameObject:
   - component: {fileID: 2972285949871840694}
   - component: {fileID: 85485851246172064}
   - component: {fileID: 6031526417806885927}
+  - component: {fileID: 6893640640463776620}
+  - component: {fileID: 5213346942864245966}
+  - component: {fileID: 8775790911320702950}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -198,5 +201,65 @@ MonoBehaviour:
   _poolCapacity: 20
   _poolMaxSize: 20
   _firePoint: {fileID: 1139960776618483336}
-  _projectileSpeed: 5
-  _fireRate: 2
+  _projectileSpeed: 4
+  _fireRate: 3
+--- !u!95 &6893640640463776620
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5342558495860005260}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f6f8af2d6f7d98c47bd880704ecb27cf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5213346942864245966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5342558495860005260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8cbab1571847b440a49b3511fdebdd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &8775790911320702950
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5342558495860005260}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
