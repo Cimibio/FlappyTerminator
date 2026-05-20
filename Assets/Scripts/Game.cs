@@ -4,7 +4,7 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     [SerializeField] private Terminator _bird;
-    [SerializeField] private PipeGenerator _pipeGenerator;
+    //[SerializeField] private PipeGenerator _pipeGenerator;
     [SerializeField] private StartScreen _startScreen;
     [SerializeField] private EndGameScreen _endGameScreen;
 
