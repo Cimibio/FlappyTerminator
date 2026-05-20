@@ -2,46 +2,47 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(TerminatorMover), typeof(ScoreCounter))]
-[RequireComponent(typeof(InputReader))]
-[RequireComponent(typeof(TerminatorCollisionDetector))]
+[RequireComponent(typeof(InputReader), typeof(PlayerAnimator))]
+[RequireComponent(typeof(CollisionDetector))]
 public class Terminator : MonoBehaviour
 {
     private TerminatorMover _mover;
     private ScoreCounter _scoreCounter;
-    private TerminatorCollisionDetector _collisionDetector;
+    private CollisionDetector _collisionDetector;
     private InputReader _inputReader;
+    private PlayerAnimator _animator;
 
     public event Action GameOver;
 
     private void Awake()
     {
         _scoreCounter = GetComponent<ScoreCounter>();
-        _collisionDetector = GetComponent<TerminatorCollisionDetector>();
+        _collisionDetector = GetComponent<CollisionDetector>();
         _mover = GetComponent<TerminatorMover>();
         _inputReader = GetComponent<InputReader>();
+        _animator = GetComponent<PlayerAnimator>();
     }
 
     private void OnEnable()
     {
-        _collisionDetector.CollisionDetected += ProcessCollision;
+        _collisionDetector.Collided += ProcessCollision;
+    }
+
+    private void Update()
+    {
+        if (_inputReader.IsJumpPressed)
+            _mover.Jump();
     }
 
     private void OnDisable()
     {
-        _collisionDetector.CollisionDetected -= ProcessCollision;
+        _collisionDetector.Collided -= ProcessCollision;
     }
 
-    private void ProcessCollision(IInteractable interactable)
+    private void ProcessCollision()
     {
-        if (interactable is Pipe)
-        {
-            GameOver?.Invoke();
-        }
-
-        else if(interactable is ScoreZone) 
-        {
-            _scoreCounter.Add();
-        }
+        GameOver?.Invoke();
+        _animator.PlayExplosionAnimation();
     }
 
     public void Reset()
