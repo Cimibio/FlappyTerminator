@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(TerminatorMover), typeof(ScoreCounter))]
+[RequireComponent(typeof(TerminatorMover), typeof(ScoreCounter), typeof(Shooter))]
 [RequireComponent(typeof(InputReader), typeof(PlayerAnimator))]
 [RequireComponent(typeof(CollisionDetector))]
 public class Terminator : MonoBehaviour
@@ -11,6 +11,7 @@ public class Terminator : MonoBehaviour
     private CollisionDetector _collisionDetector;
     private InputReader _inputReader;
     private PlayerAnimator _animator;
+    private Shooter _shooter;
 
     public event Action GameOver;
 
@@ -21,6 +22,7 @@ public class Terminator : MonoBehaviour
         _mover = GetComponent<TerminatorMover>();
         _inputReader = GetComponent<InputReader>();
         _animator = GetComponent<PlayerAnimator>();
+        _shooter = GetComponent<Shooter>();
     }
 
     private void OnEnable()
@@ -32,6 +34,9 @@ public class Terminator : MonoBehaviour
     {
         if (_inputReader.IsJumpPressed)
             _mover.Jump();
+
+        if (_inputReader.IsAttackPressed)
+            _shooter.Shoot();
     }
 
     private void OnDisable()
