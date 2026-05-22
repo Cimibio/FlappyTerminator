@@ -706,6 +706,7 @@ MonoBehaviour:
   _poolMaxSize: 20
   _repeatRate: 4
   _deltaSpawnAreaOffset: 3.5
+  _lifetime: 15
 --- !u!114 &1216162872 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5696316783033314232, guid: 871d9dd9d4dea3449bf9d48e914bc3c3, type: 3}

@@ -43,7 +43,7 @@ public class ProjectileSpawner : Spawner<Projectile>
         Projectile projectile = GetFromPool();
         projectile.transform.position = _firePoint.position;
 
-        Vector2 direction = _firePoint.right;
+        Vector2 direction = _firePoint.up;
         projectile.Init(direction, _projectileSpeed, _lifetime);
     }
 

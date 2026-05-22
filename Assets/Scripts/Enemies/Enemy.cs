@@ -2,7 +2,8 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(CollisionDetector), typeof(EnemyAnimator), typeof(Collider2D))]
-[RequireComponent(typeof(Rigidbody2D), typeof(LifeTimer))]
+[RequireComponent(typeof(Rigidbody2D), typeof(LifeTimer), typeof(Rotator))]
+[RequireComponent (typeof(Mover))]
 public class Enemy : MonoBehaviour
 {
     private CollisionDetector _collisionDetector;
@@ -10,6 +11,8 @@ public class Enemy : MonoBehaviour
     private Collider2D _collider;
     private Rigidbody2D _rigidbody;
     private LifeTimer _lifeTimer;
+    private Rotator _rotator;
+    private Mover _enemyMover;
 
     public event Action<Enemy> Died;
 
@@ -20,6 +23,8 @@ public class Enemy : MonoBehaviour
         _collider = GetComponent<Collider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _lifeTimer = GetComponent<LifeTimer>();
+        _rotator = GetComponent<Rotator>();
+        _enemyMover = GetComponent<Mover>();
     }
 
     private void Start()
@@ -42,15 +47,21 @@ public class Enemy : MonoBehaviour
         _lifeTimer.Expired -= Die;
     }
 
-    public void Init(float lifetime)
+    public void Init(Vector2 direction, float speed, float lifetime)
     {
-        _collider.enabled = true;
+        //Vector2 velocity = direction.normalized * speed;
+
         _lifeTimer.StartTimer(lifetime);
+        _enemyMover.SetDirection(speed);
+        _rotator.SetDirection(direction);
+        _collider.enabled = true;
     }
 
     private void Die()
     {
         _lifeTimer.StopTimer();
+        _enemyMover.ResetMovement();
+        _rotator.ResetRotation();
         _animator.PlayExplosionAnimation();
         _collider.enabled = false;
     }

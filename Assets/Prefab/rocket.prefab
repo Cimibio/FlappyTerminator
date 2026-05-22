@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 4142564683860142271}
   - component: {fileID: 3227919317622351782}
   - component: {fileID: 3561084000588423045}
+  - component: {fileID: 1619208591302734387}
+  - component: {fileID: 7291915226126124183}
   m_Layer: 7
   m_Name: rocket
   m_TagString: Untagged
@@ -77,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2d005944c8634264aa2ea9f1d7224f89, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 07d3a3b99c7f722468bce0007bbfdfdc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -121,8 +123,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.26, y: 0.08}
-  m_Direction: 1
+  m_Size: {x: 0.06, y: 0.25}
+  m_Direction: 0
 --- !u!114 &4142564683860142271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,3 +164,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9262148d244ab4a43a71b24a07d95245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1619208591302734387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2599853034745019395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3387508d2822114e8e24f9f09d8c8d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7291915226126124183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2599853034745019395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 450f748cb1bdda840a77dd81b1a63995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotateToDirection: 1
+  _rotationSpeed: 360
+  _angleOffset: -90

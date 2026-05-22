@@ -5,14 +5,18 @@ using UnityEngine;
 public class EnemySpawner : Spawner<Enemy>
 {
     [SerializeField] private float _repeatRate = 1f;
+    [SerializeField] private float _enemySpeed = 1f;
     [SerializeField] private float _deltaSpawnAreaOffset = 3.5f;
     [SerializeField] private float _lifetime = 15f;
+    [SerializeField] private Vector2 _startVector = Vector2.up;
 
     private bool _isSpawning = true;
     private Coroutine _spawnCoroutine;
+    private WaitForSeconds _sleepTime;
 
     protected override void Start()
     {
+        _sleepTime = new WaitForSeconds(_repeatRate);
         base.Start();
         StartSpawning();
     }
@@ -27,7 +31,9 @@ public class EnemySpawner : Spawner<Enemy>
         enemy.transform.position = GetRandomSpawnPoint();
 
         base.Spawn(enemy);
-        enemy.Init(_lifetime);
+
+        Vector2 direction = _startVector;
+        enemy.Init(direction, _enemySpeed, _lifetime);
         enemy.Died += Remove;
     }
 
@@ -76,12 +82,10 @@ public class EnemySpawner : Spawner<Enemy>
 
     private IEnumerator SpawnRoutine()
     {
-        var wait = new WaitForSeconds(_repeatRate);
-
         while (_isSpawning)
         {
             GetFromPool();
-            yield return wait;
+            yield return _sleepTime;
         }
     }
 }

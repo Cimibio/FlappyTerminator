@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7de5772fd694ae246a3629c928fc68e5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 83155b95ce71ff84dbdcc7bd70898595, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -199,6 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e680f1be19af83d4781839de929b632d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startDirection: {x: 1, y: 0}
 --- !u!114 &399112849415201820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,6 +290,7 @@ MonoBehaviour:
   _poolMaxSize: 20
   _firePoint: {fileID: 5472194505862026675}
   _projectileSpeed: 10
+  _lifetime: 5
 --- !u!1 &5959297548245663874
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +316,7 @@ Transform:
   m_GameObject: {fileID: 5959297548245663874}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.259, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

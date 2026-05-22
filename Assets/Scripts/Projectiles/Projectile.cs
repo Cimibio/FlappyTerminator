@@ -1,12 +1,12 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(ProjectileMover), typeof(ProjectileRotator), typeof(CollisionDetector))]
+[RequireComponent(typeof(Mover), typeof(Rotator), typeof(CollisionDetector))]
 [RequireComponent (typeof(LifeTimer))]
 public class Projectile : MonoBehaviour
 {
-    private ProjectileMover _mover;
-    private ProjectileRotator _rotator;
+    private Mover _mover;
+    private Rotator _rotator;
     private CollisionDetector _collisionDetector;
     private LifeTimer _lifeTimer;
 
@@ -14,8 +14,8 @@ public class Projectile : MonoBehaviour
 
     private void Awake()
     {
-        _mover = GetComponent<ProjectileMover>();
-        _rotator = GetComponent<ProjectileRotator>();
+        _mover = GetComponent<Mover>();
+        _rotator = GetComponent<Rotator>();
         _collisionDetector = GetComponent<CollisionDetector>();
         _lifeTimer = GetComponent<LifeTimer>();
     }
@@ -35,16 +35,15 @@ public class Projectile : MonoBehaviour
 
     public void Init(Vector2 direction, float speed, float lifetime)
     {
-        Vector2 velocity = direction.normalized * speed;
+        //Vector2 velocity = direction.normalized * speed;
 
         _lifeTimer.StartTimer(lifetime);
-        _mover.SetDirection(velocity);
-        _rotator.SetRotation(direction);
+        _mover.SetDirection(speed);
+        _rotator.SetDirection(direction);
     }
 
     private void Die()
     {
-        //ResetProjectile();
         Died?.Invoke(this);
     }
 

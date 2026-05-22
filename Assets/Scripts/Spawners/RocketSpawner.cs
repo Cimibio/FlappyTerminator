@@ -28,12 +28,12 @@ public class RocketSpawner : Spawner<Rocket>
     protected override void Spawn(Rocket rocket)
     {
         base.Spawn(rocket);
-        rocket.Died += OnProjectileDied;
+        rocket.Died += Remove;
     }
 
     protected override void Despawn(Rocket rocket)
     {
-        rocket.Died -= OnProjectileDied;
+        rocket.Died -= Remove;
         base.Despawn(rocket);
     }
 
@@ -42,11 +42,11 @@ public class RocketSpawner : Spawner<Rocket>
         Rocket rocket = GetFromPool();
         rocket.transform.position = _firePoint.position;
 
-        Vector2 direction = -_firePoint.right;
+        Vector2 direction = _firePoint.up;
         rocket.Init(direction, _projectileSpeed, _lifetime);
     }
 
-    private void OnProjectileDied(Rocket rocket)
+    private void Remove(Rocket rocket)
     {
         Despawn(rocket);
     }
