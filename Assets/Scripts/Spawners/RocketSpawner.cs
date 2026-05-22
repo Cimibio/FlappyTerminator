@@ -7,6 +7,7 @@ public class RocketSpawner : Spawner<Rocket>
     [SerializeField] private Transform _firePoint;
     [SerializeField] private float _projectileSpeed = 5f;
     [SerializeField] private float _fireRate = 2f;
+    [SerializeField] private float _lifetime = 10f;
 
     private bool _isSpawning = true;
     private Coroutine _spawnCoroutine;
@@ -42,7 +43,7 @@ public class RocketSpawner : Spawner<Rocket>
         rocket.transform.position = _firePoint.position;
 
         Vector2 direction = -_firePoint.right;
-        rocket.Init(direction, _projectileSpeed);
+        rocket.Init(direction, _projectileSpeed, _lifetime);
     }
 
     private void OnProjectileDied(Rocket rocket)

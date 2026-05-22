@@ -6,6 +6,7 @@ public class ProjectileSpawner : Spawner<Projectile>
 {
     [SerializeField] private Transform _firePoint;
     [SerializeField] private float _projectileSpeed = 10f;
+    [SerializeField] private float _lifetime = 5f;
 
     private Shooter _shooter;
 
@@ -17,36 +18,36 @@ public class ProjectileSpawner : Spawner<Projectile>
 
     private void OnEnable()
     {
-        _shooter.Shooted += OnShoot;
+        _shooter.Shooted += Shoot;
     }
 
     private void OnDisable()
     {
-        _shooter.Shooted -= OnShoot;
+        _shooter.Shooted -= Shoot;
     }
 
     protected override void Spawn(Projectile projectile)
     {
         base.Spawn(projectile);
-        projectile.Died += OnProjectileDied;
+        projectile.Died += Remove;
     }
 
     protected override void Despawn(Projectile projectile)
     {
-        projectile.Died -= OnProjectileDied;
+        projectile.Died -= Remove;
         base.Despawn(projectile);
     }
 
-    private void OnShoot()
+    private void Shoot()
     {
         Projectile projectile = GetFromPool();
         projectile.transform.position = _firePoint.position;
 
         Vector2 direction = _firePoint.right;
-        projectile.Init(direction, _projectileSpeed);
+        projectile.Init(direction, _projectileSpeed, _lifetime);
     }
 
-    private void OnProjectileDied(Projectile projectile)
+    private void Remove(Projectile projectile)
     {
         Despawn(projectile);
     }
