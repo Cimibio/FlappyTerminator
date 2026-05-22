@@ -3,23 +3,28 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
-    [SerializeField] private Terminator _terminator;
+    [SerializeField] private TerminatorSpawner _terminatorSpawner;
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private StartScreen _startScreen;
     [SerializeField] private EndGameScreen _endGameScreen;
+    [SerializeField] private TerminatorTracker _tracker;
+
+    private bool _isGameActive = false;
 
     private void OnEnable()
     {
         _startScreen.PlayButtonClicked += OnPlayButtonClick;
         _endGameScreen.RestartButtonClicked += OnRestartButtonClick;
-        _terminator.GameOver += OnGameOver;
+        _terminatorSpawner.TerminatorDied += OnTerminatorDied;
+        _terminatorSpawner.TerminatorSpawned += SetTrackingTarget;
     }
 
     private void OnDisable()
     {
         _startScreen.PlayButtonClicked -= OnPlayButtonClick;
         _endGameScreen.RestartButtonClicked -= OnRestartButtonClick;
-        _terminator.GameOver -= OnGameOver;
+        _terminatorSpawner.TerminatorDied -= OnTerminatorDied;
+        _terminatorSpawner.TerminatorSpawned -= SetTrackingTarget;
     }
 
     private void Start()
@@ -28,10 +33,20 @@ public class Game : MonoBehaviour
         _startScreen.Open();
     }
 
-    private void OnGameOver()
+    private void SetTrackingTarget(Terminator terminator)
     {
+        _tracker.SetTarget(terminator);
+    }
+
+    private void OnTerminatorDied()
+    {
+        if (!_isGameActive) 
+            return;
+
+        _isGameActive = false;
         Time.timeScale = 0;
         _endGameScreen.Open();
+
         _enemySpawner.Reset();
     }
 
@@ -40,6 +55,7 @@ public class Game : MonoBehaviour
         _endGameScreen.Close();
         StartGame();
     }
+
     private void OnPlayButtonClick()
     {
         _startScreen.Close();
@@ -48,7 +64,11 @@ public class Game : MonoBehaviour
 
     private void StartGame()
     {
+        _isGameActive = true;
         Time.timeScale = 1;
-        _terminator.Reset();        
+
+        _terminatorSpawner.SpawnNewTerminator();
+
+        _enemySpawner.StartSpawning();
     }
 }

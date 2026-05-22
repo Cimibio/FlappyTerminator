@@ -16,4 +16,13 @@ public class PlayerAnimator : MonoBehaviour
     {
         _animator.SetTrigger(_dieHash);
     }
+
+    public void ResetAnimation()
+    {
+        if (_animator != null)
+        {
+            _animator.Rebind();
+            _animator.Update(0f);
+        }
+    }
 }

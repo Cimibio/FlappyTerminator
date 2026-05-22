@@ -6,8 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(CollisionDetector))]
 public class Terminator : MonoBehaviour
 {
-    //[SerializeField] private Vector2 _startDirection = Vector2.right;
-
     private TerminatorMover _mover;
     private ScoreCounter _scoreCounter;
     private CollisionDetector _collisionDetector;
@@ -25,18 +23,12 @@ public class Terminator : MonoBehaviour
         _inputReader = GetComponent<InputReader>();
         _animator = GetComponent<PlayerAnimator>();
         _shooter = GetComponent<Shooter>();
-        //_rotator = GetComponent<Rotator>();
     }
 
     private void OnEnable()
     {
         _collisionDetector.Collided += ProcessCollision;
     }
-
-    //private void Start()
-    //{
-    //    _rotator.SetDirection(_startDirection);
-    //}
 
     private void Update()
     {
@@ -52,15 +44,16 @@ public class Terminator : MonoBehaviour
         _collisionDetector.Collided -= ProcessCollision;
     }
 
+    public void Reset()
+    {
+        _animator.ResetAnimation();
+        _scoreCounter.Reset();
+        _mover.Reset();
+    }
+
     private void ProcessCollision()
     {
         GameOver?.Invoke();
         _animator.PlayExplosionAnimation();
-    }
-
-    public void Reset()
-    {
-        _scoreCounter.Reset();
-        _mover.Reset();
     }
 }

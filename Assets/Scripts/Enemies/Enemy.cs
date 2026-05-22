@@ -49,8 +49,6 @@ public class Enemy : MonoBehaviour
 
     public void Init(Vector2 direction, float speed, float lifetime)
     {
-        //Vector2 velocity = direction.normalized * speed;
-
         _lifeTimer.StartTimer(lifetime);
         _enemyMover.SetDirection(speed);
         _rotator.SetDirection(direction);
@@ -61,13 +59,13 @@ public class Enemy : MonoBehaviour
     {
         _lifeTimer.StopTimer();
         _enemyMover.ResetMovement();
-        _rotator.ResetRotation();
         _animator.PlayExplosionAnimation();
         _collider.enabled = false;
     }
 
     private void Remove()
     {
+        _rotator.ResetRotation();
         Debug.Log($"[{gameObject.name}] Died!");
         Died?.Invoke(this);
     }

@@ -8,16 +8,23 @@ public class RocketSpawner : Spawner<Rocket>
     [SerializeField] private float _projectileSpeed = 5f;
     [SerializeField] private float _fireRate = 2f;
     [SerializeField] private float _lifetime = 10f;
+    [SerializeField] private float _startSpawnDelay = 0.5f;
 
     private bool _isSpawning = true;
     private Coroutine _spawnCoroutine;
     private WaitForSeconds _sleep;
+    private WaitForSeconds _spawnDelay;
+
+    private void OnEnable()
+    {
+        StartSpawning();        
+    }
 
     protected override void Start()
     {
         base.Start();
         _sleep = new WaitForSeconds(_fireRate);
-        StartSpawning();
+        _spawnDelay = new WaitForSeconds(_startSpawnDelay);
     }
 
     private void OnDisable()
@@ -72,6 +79,8 @@ public class RocketSpawner : Spawner<Rocket>
 
     private IEnumerator SpawnRoutine()
     {
+        yield return _spawnDelay;
+
         while (_isSpawning)
         {
             Shoot();
