@@ -19,6 +19,7 @@ public class RocketSpawner : CommandSpawner<Rocket>
         if (rocket == null) 
             return;
 
+        rocket.Died += Remove;
         rocket.transform.position = firePoint.position;
 
         Vector2 direction = firePoint.up;
@@ -29,5 +30,11 @@ public class RocketSpawner : CommandSpawner<Rocket>
     {
         Vector2 direction = _spawnPoint.up;
         rocket.Init(direction, _rocketSpeed, _lifetime);
+    }
+
+    private void Remove(Rocket rocket)
+    {
+        rocket.Died -= Remove;
+        ReleaseToPool(rocket);
     }
 }

@@ -25,9 +25,16 @@ public class ProjectileSpawner : CommandSpawner<Projectile>
         if (projectile == null)
             return;
 
+        projectile.Died += Remove;
         projectile.transform.position = firePoint.position;
 
         Vector2 direction = firePoint.up;
         projectile.Init(direction, _projectileSpeed, _lifetime);
+    }
+
+    private void Remove(Projectile projectile)
+    {
+        projectile.Died -= Remove;
+        ReleaseToPool(projectile);
     }
 }

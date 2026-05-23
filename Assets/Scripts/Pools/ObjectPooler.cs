@@ -67,12 +67,4 @@ public abstract class ObjectPooler<T> : MonoBehaviour where T : MonoBehaviour
 
         _activeObjects.Clear();
     }
-
-    public void ClearPool()
-    {
-        ReturnAllToPool();
-
-        // Опционально: очистить внутренний пул Unity
-        // Pool.Clear();
-    }
 }

@@ -25,6 +25,8 @@ public class EnemySpawner : PeriodicSpawner<Enemy>
         if (enemy == null) 
             return;
 
+        enemy.Died += Remove;
+        enemy.ResetState();
         enemy.transform.position = GetRandomSpawnPoint();
         enemy.Init(_startVector, _enemySpeed, _lifetime, _rocketSpawner);
     }
@@ -38,5 +40,11 @@ public class EnemySpawner : PeriodicSpawner<Enemy>
             _spawnAreaCenter.position.y + randomYOffset,
             _spawnAreaCenter.position.z
         );
+    }
+
+    private void Remove(Enemy enemy)
+    {
+        enemy.Died -= Remove;
+        ReleaseToPool(enemy);
     }
 }

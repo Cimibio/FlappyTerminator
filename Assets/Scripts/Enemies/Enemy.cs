@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(CollisionDetector), typeof(EnemyAnimator), typeof(Collider2D))]
 [RequireComponent(typeof(Rigidbody2D), typeof(LifeTimer), typeof(Rotator))]
 [RequireComponent (typeof(Mover), typeof(EnemyShooter))]
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IResettable
 {
     private CollisionDetector _collisionDetector;
     private EnemyAnimator _animator;
@@ -47,6 +47,7 @@ public class Enemy : MonoBehaviour
         _animator.EnemyExplosionAnimationCompleted -= Remove;
         _collisionDetector.Collided -= Die;
         _lifeTimer.Expired -= Die;
+        ResetState();
     }
 
     public void Init(Vector2 direction, float speed, float lifetime, RocketSpawner rocketSpawner)
@@ -60,19 +61,18 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        ResetEnemy();
         _animator.PlayExplosionAnimation();
         _collider.enabled = false;
     }
 
     private void Remove()
     {
-        _rotator.ResetRotation();
+        //_rotator.ResetRotation();
         Debug.Log($"[{gameObject.name}] Died!");
         Died?.Invoke(this);
     }
 
-    private void ResetEnemy()
+    public void ResetState()
     {
         _lifeTimer.StopTimer();
         _rotator.ResetRotation();

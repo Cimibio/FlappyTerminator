@@ -19,6 +19,19 @@ namespace Spawners
             _repeatRateWait = new WaitForSeconds(_repeatRate);
         }
 
+        protected abstract void SpawnObject();
+
+        protected virtual IEnumerator SpawnRoutine()
+        {
+            yield return _startDelayWait;
+
+            while (_isSpawning)
+            {
+                SpawnObject();
+                yield return _repeatRateWait;
+            }
+        }
+
         public virtual void StartSpawning()
         {
             if (_spawnCoroutine == null && gameObject.activeInHierarchy)
@@ -37,19 +50,6 @@ namespace Spawners
                 _spawnCoroutine = null;
             }
         }
-
-        protected virtual IEnumerator SpawnRoutine()
-        {
-            yield return _startDelayWait;
-
-            while (_isSpawning)
-            {
-                SpawnObject();
-                yield return _repeatRateWait;
-            }
-        }
-
-        protected abstract void SpawnObject();
 
         public virtual void Reset()
         {

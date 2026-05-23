@@ -16,7 +16,19 @@ public class TerminatorSpawner : CommandSpawner<Terminator>
         terminator.GameOver += OnTerminatorDeath;
         _currentTerminator = terminator;
         TerminatorSpawned?.Invoke(terminator);
-        terminator.SetProjectileSpawner(_projectileSpawner);
+        terminator.SetProjectileSpawner(_projectileSpawner);        
+    }
+
+    public override void Reset()
+    {
+        if (_currentTerminator != null)
+        {
+            _currentTerminator.GameOver -= OnTerminatorDeath;
+            ReleaseToPool(_currentTerminator);
+            _currentTerminator = null;
+        }
+
+        base.Reset();
     }
 
     public void SpawnNewTerminator()
@@ -33,20 +45,8 @@ public class TerminatorSpawner : CommandSpawner<Terminator>
     private void OnTerminatorDeath()
     {
         if (_currentTerminator != null)
-            _currentTerminator.Reset();
+            _currentTerminator.ResetTerminator();
 
         TerminatorDied?.Invoke();
-    }
-
-    public override void Reset()
-    {
-        if (_currentTerminator != null)
-        {
-            _currentTerminator.GameOver -= OnTerminatorDeath;
-            ReleaseToPool(_currentTerminator);
-            _currentTerminator = null;
-        }
-
-        base.Reset();
     }
 }
