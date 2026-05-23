@@ -49,6 +49,8 @@ public class Enemy : MonoBehaviour
         _animator.EnemyExplosionAnimationCompleted -= Remove;
         _collisionDetector.Collided -= Explode;
         _lifeTimer.Expired -= Remove;
+
+        ResetState();
     }
 
     public void Init(Vector2 direction, float speed, float lifetime, RocketSpawner rocketSpawner)
@@ -81,6 +83,9 @@ public class Enemy : MonoBehaviour
 
     public void ResetState()
     {
+        Destroyed = null;
+        Died = null;
+
         _lifeTimer.StopTimer();
         _rotator.ResetRotation();
         _enemyMover.ResetMovement();

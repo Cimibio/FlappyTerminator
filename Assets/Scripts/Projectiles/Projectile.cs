@@ -30,6 +30,8 @@ public class Projectile : MonoBehaviour
     {
         _collisionDetector.Collided -= Die;
         _lifeTimer.Expired -= Die;
+
+        ResetState();
     }
 
     public void Init(Vector2 direction, float speed, float lifetime)
@@ -46,6 +48,8 @@ public class Projectile : MonoBehaviour
 
     public void ResetState()
     {
+        Died = null;
+
         _mover.ResetMovement();
         _rotator.ResetRotation();
         _lifeTimer.StopTimer();
