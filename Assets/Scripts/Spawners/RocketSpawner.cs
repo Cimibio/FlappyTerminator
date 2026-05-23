@@ -6,6 +6,8 @@ public class RocketSpawner : CommandSpawner<Rocket>
     [SerializeField] private float _rocketSpeed = 5f;
     [SerializeField] private float _lifetime = 10f;
 
+    protected override void OnObjectSpawned(Rocket rocket) { }
+
     public void ShootFromPoint(Transform firePoint)
     {
         if (_objectPooler == null)
@@ -16,25 +18,24 @@ public class RocketSpawner : CommandSpawner<Rocket>
 
         Rocket rocket = GetFromPool();
 
-        if (rocket == null) 
+        if (rocket == null)
             return;
 
         rocket.Died += Remove;
-        rocket.transform.position = firePoint.position;
-
-        Vector2 direction = firePoint.up;
-        rocket.Init(direction, _rocketSpeed, _lifetime);
-    }
-
-    protected override void OnObjectSpawned(Rocket rocket)
-    {
-        Vector2 direction = _spawnPoint.up;
-        rocket.Init(direction, _rocketSpeed, _lifetime);
+        SetupRocket(rocket, firePoint);
     }
 
     private void Remove(Rocket rocket)
     {
+        rocket.ResetState();
         rocket.Died -= Remove;
         ReleaseToPool(rocket);
+    }
+
+    private void SetupRocket(Rocket rocket, Transform firePoint)
+    {
+        rocket.transform.position = firePoint.position;
+        Vector2 direction = firePoint.up;
+        rocket.Init(direction, _rocketSpeed, _lifetime);
     }
 }

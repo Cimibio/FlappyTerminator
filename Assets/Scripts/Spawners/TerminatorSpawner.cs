@@ -39,7 +39,7 @@ public class TerminatorSpawner : CommandSpawner<Terminator>
             ReleaseToPool(_currentTerminator);
         }
 
-        SpawnAtPoint();
+        SpawnAtSpawnPoint();
     }
 
     private void OnTerminatorDeath()

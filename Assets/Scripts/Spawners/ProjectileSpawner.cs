@@ -8,8 +8,8 @@ public class ProjectileSpawner : CommandSpawner<Projectile>
 
     protected override void OnObjectSpawned(Projectile projectile)
     {
-        Vector2 direction = _spawnPoint.up;
-        projectile.Init(direction, _projectileSpeed, _lifetime);
+        //Vector2 direction = _spawnPoint.up;
+        //projectile.Init(direction, _projectileSpeed, _lifetime);
     }
 
     public void ShootFromPoint(Transform firePoint)
@@ -26,6 +26,11 @@ public class ProjectileSpawner : CommandSpawner<Projectile>
             return;
 
         projectile.Died += Remove;
+        SetupProjectile(projectile, firePoint);
+    }
+
+    private void SetupProjectile(Projectile projectile, Transform firePoint)
+    {
         projectile.transform.position = firePoint.position;
 
         Vector2 direction = firePoint.up;
@@ -34,6 +39,7 @@ public class ProjectileSpawner : CommandSpawner<Projectile>
 
     private void Remove(Projectile projectile)
     {
+        projectile.ResetState();
         projectile.Died -= Remove;
         ReleaseToPool(projectile);
     }

@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 
 public class Shooter : MonoBehaviour
 {
@@ -8,8 +7,6 @@ public class Shooter : MonoBehaviour
 
     private ProjectileSpawner _projectileSpawner;
     private float _lastShotTime = -Mathf.Infinity;
-
-    //public event Action Shooted;
 
     public void SetSpawner(ProjectileSpawner spawner)
     {

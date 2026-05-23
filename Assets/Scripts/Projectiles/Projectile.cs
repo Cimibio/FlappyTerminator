@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Mover), typeof(Rotator), typeof(CollisionDetector))]
 [RequireComponent (typeof(LifeTimer))]
-public class Projectile : MonoBehaviour, IResettable
+public class Projectile : MonoBehaviour
 {
     private Mover _mover;
     private Rotator _rotator;
@@ -30,7 +30,6 @@ public class Projectile : MonoBehaviour, IResettable
     {
         _collisionDetector.Collided -= Die;
         _lifeTimer.Expired -= Die;
-        ResetState();
     }
 
     public void Init(Vector2 direction, float speed, float lifetime)
@@ -42,7 +41,6 @@ public class Projectile : MonoBehaviour, IResettable
 
     private void Die()
     {
-        ResetState();
         Died?.Invoke(this);
     }
 

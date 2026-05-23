@@ -639,6 +639,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
   - component: {fileID: 519420034}
+  - component: {fileID: 519420035}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -754,6 +755,18 @@ MonoBehaviour:
   _startScreen: {fileID: 1825567880}
   _endGameScreen: {fileID: 1483598709}
   _terminatorTracker: {fileID: 519420033}
+--- !u!114 &519420035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dd3cec3f023aeb4cad213c2aadeebeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &649466300
 GameObject:
   m_ObjectHideFlags: 0
@@ -1396,7 +1409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6f776d9e6ca33f4b8a0c9895805945c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreCounter: {fileID: 0}
+  _scoreCounter: {fileID: 519420035}
   _score: {fileID: 1868270345}
 --- !u!114 &1868270345
 MonoBehaviour:
@@ -1495,37 +1508,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1868270342}
   m_CullTransparentMesh: 1
---- !u!1 &1879254869
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1879254870}
-  m_Layer: 0
-  m_Name: Container
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1879254870
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1879254869}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.4532495, y: 0.58097553, z: 0.23763466}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1982754063
 GameObject:
   m_ObjectHideFlags: 0
@@ -1718,7 +1700,7 @@ MonoBehaviour:
   _objectPooler: {fileID: 1269638151}
   _spawnPoint: {fileID: 0}
   _rocketSpeed: 5
-  _lifetime: 10
+  _lifetime: 5
 --- !u!1 &2140838266
 GameObject:
   m_ObjectHideFlags: 0
@@ -1773,7 +1755,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 384389505}
-  - {fileID: 1879254870}
   - {fileID: 499193619}
   - {fileID: 1982754064}
   - {fileID: 1006269426}

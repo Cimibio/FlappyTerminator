@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent (typeof(ScoreCounter))]
 public class Game : MonoBehaviour
 {
     [SerializeField] private TerminatorSpawner _terminatorSpawner;
@@ -10,14 +11,19 @@ public class Game : MonoBehaviour
     [SerializeField] private EndGameScreen _endGameScreen;
     [SerializeField] private TerminatorTracker _terminatorTracker;
 
+    private ScoreCounter _scoreCounter;
+
     private bool _isGameActive = false;
 
     private void OnEnable()
     {
+        _scoreCounter = GetComponent<ScoreCounter>();
+
         _startScreen.PlayButtonClicked += OnPlayButtonClick;
         _endGameScreen.RestartButtonClicked += OnRestartButtonClick;
         _terminatorSpawner.TerminatorDied += OnTerminatorDied;
         _terminatorSpawner.TerminatorSpawned += SetTrackingTarget;
+        _enemySpawner.Scored += AddScore;
     }
 
     private void OnDisable()
@@ -26,6 +32,7 @@ public class Game : MonoBehaviour
         _endGameScreen.RestartButtonClicked -= OnRestartButtonClick;
         _terminatorSpawner.TerminatorDied -= OnTerminatorDied;
         _terminatorSpawner.TerminatorSpawned -= SetTrackingTarget;
+        _enemySpawner.Scored -= AddScore;
     }
 
     private void Start()
@@ -62,10 +69,7 @@ public class Game : MonoBehaviour
         _isGameActive = true;
         Time.timeScale = 1;
 
-        _terminatorSpawner.Reset();
-        _enemySpawner.Reset();
-        _rocketSpawner.Reset();
-        _projectileSpawner.Reset();
+        ResetGame();
 
         _terminatorSpawner.SpawnNewTerminator();
         _enemySpawner.StartSpawning();
@@ -74,5 +78,19 @@ public class Game : MonoBehaviour
     private void SetTrackingTarget(Terminator terminator)
     {
         _terminatorTracker.SetTarget(terminator);
+    }
+
+    private void ResetGame()
+    {
+        _terminatorSpawner.Reset();
+        _enemySpawner.Reset();
+        _rocketSpawner.Reset();
+        _projectileSpawner.Reset();
+        _scoreCounter.Reset();
+    }
+
+    private void AddScore()
+    {
+        _scoreCounter.Add();
     }
 }

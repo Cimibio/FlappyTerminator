@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(CollisionDetector), typeof(EnemyAnimator), typeof(Collider2D))]
 [RequireComponent(typeof(Rigidbody2D), typeof(LifeTimer), typeof(Rotator))]
 [RequireComponent (typeof(Mover), typeof(EnemyShooter))]
-public class Enemy : MonoBehaviour, IResettable
+public class Enemy : MonoBehaviour
 {
     private CollisionDetector _collisionDetector;
     private EnemyAnimator _animator;
@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour, IResettable
     private EnemyShooter _enemyShooter;
 
     public event Action<Enemy> Died;
+    public event Action Destroyed;
 
     private void Awake()
     {
@@ -38,16 +39,15 @@ public class Enemy : MonoBehaviour, IResettable
     private void OnEnable()
     {        
         _animator.EnemyExplosionAnimationCompleted += Remove;
-        _collisionDetector.Collided += Die;
-        _lifeTimer.Expired += Die;
+        _collisionDetector.Collided += Explode;
+        _lifeTimer.Expired += Remove;
     }
 
     private void OnDisable()
     {
         _animator.EnemyExplosionAnimationCompleted -= Remove;
-        _collisionDetector.Collided -= Die;
-        _lifeTimer.Expired -= Die;
-        ResetState();
+        _collisionDetector.Collided -= Explode;
+        _lifeTimer.Expired -= Remove;
     }
 
     public void Init(Vector2 direction, float speed, float lifetime, RocketSpawner rocketSpawner)
@@ -59,15 +59,15 @@ public class Enemy : MonoBehaviour, IResettable
         _collider.enabled = true;
     }    
 
-    private void Die()
+    private void Explode()
     {
+        Destroyed?.Invoke();
         _animator.PlayExplosionAnimation();
         _collider.enabled = false;
     }
 
     private void Remove()
     {
-        //_rotator.ResetRotation();
         Debug.Log($"[{gameObject.name}] Died!");
         Died?.Invoke(this);
     }

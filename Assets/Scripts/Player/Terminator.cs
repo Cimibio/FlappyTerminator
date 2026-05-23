@@ -1,13 +1,12 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(TerminatorMover), typeof(ScoreCounter), typeof(Shooter))]
+[RequireComponent(typeof(TerminatorMover), typeof(Shooter))]
 [RequireComponent(typeof(InputReader), typeof(PlayerAnimator))]
 [RequireComponent(typeof(CollisionDetector))]
 public class Terminator : MonoBehaviour
 {
     private TerminatorMover _mover;
-    private ScoreCounter _scoreCounter;
     private CollisionDetector _collisionDetector;
     private InputReader _inputReader;
     private PlayerAnimator _animator;
@@ -17,7 +16,6 @@ public class Terminator : MonoBehaviour
 
     private void Awake()
     {
-        _scoreCounter = GetComponent<ScoreCounter>();
         _collisionDetector = GetComponent<CollisionDetector>();
         _mover = GetComponent<TerminatorMover>();
         _inputReader = GetComponent<InputReader>();
@@ -47,7 +45,6 @@ public class Terminator : MonoBehaviour
     public void ResetTerminator()
     {
         _animator.ResetAnimation();
-        _scoreCounter.Reset();
         _mover.Reset();
     }
 
