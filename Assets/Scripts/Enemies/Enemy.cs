@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     private Rotator _rotator;
     private Mover _enemyMover;
     private EnemyShooter _enemyShooter;
+    private bool _isDead;
 
     public event Action<Enemy> Died;
     public event Action Destroyed;
@@ -57,10 +58,16 @@ public class Enemy : MonoBehaviour
         _rotator.SetDirection(direction);
         _enemyShooter.SetRocketSpawner(rocketSpawner);
         _collider.enabled = true;
+        _isDead = false;
     }    
 
     private void Explode()
     {
+        if (_isDead) 
+            return;
+
+        _isDead = true;
+        _lifeTimer.StopTimer();
         Destroyed?.Invoke();
         _animator.PlayExplosionAnimation();
         _collider.enabled = false;

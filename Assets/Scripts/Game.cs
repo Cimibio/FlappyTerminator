@@ -91,6 +91,7 @@ public class Game : MonoBehaviour
 
     private void AddScore()
     {
+        Debug.Log("Explode detected, score added");
         _scoreCounter.Add();
     }
 }
