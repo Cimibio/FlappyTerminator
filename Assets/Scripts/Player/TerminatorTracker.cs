@@ -3,8 +3,7 @@ using UnityEngine;
 public class TerminatorTracker : MonoBehaviour
 {
     [SerializeField] private float _xOffset;
-
-    private Terminator _terminator;
+    [SerializeField] private Transform _terminator;
 
     private void Update()
     {
@@ -13,7 +12,7 @@ public class TerminatorTracker : MonoBehaviour
         transform.position = position;
     }
 
-    public void SetTarget(Terminator terminator)
+    public void SetTarget(Transform terminator)
     {
         _terminator = terminator;
     }

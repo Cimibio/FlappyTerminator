@@ -77,7 +77,7 @@ public class Game : MonoBehaviour
 
     private void SetTrackingTarget(Terminator terminator)
     {
-        _terminatorTracker.SetTarget(terminator);
+        _terminatorTracker.SetTarget(terminator.transform);
     }
 
     private void ResetGame()
