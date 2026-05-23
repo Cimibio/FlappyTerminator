@@ -12,6 +12,7 @@ public class Terminator : MonoBehaviour
     private InputReader _inputReader;
     private PlayerAnimator _animator;
     private Shooter _shooter;
+    //private ProjectileSpawner _projectileSpawner;
 
     public event Action GameOver;
 
@@ -49,6 +50,11 @@ public class Terminator : MonoBehaviour
         _animator.ResetAnimation();
         _scoreCounter.Reset();
         _mover.Reset();
+    }
+
+    public void SetProjectileSpawner(ProjectileSpawner spawner)
+    {
+        _shooter.SetSpawner(spawner);
     }
 
     private void ProcessCollision()

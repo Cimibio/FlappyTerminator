@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1139960776618483336}
+  - component: {fileID: 1369795236609626641}
   m_Layer: 7
   m_Name: FirePoint
   m_TagString: Untagged
@@ -31,6 +32,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1905925014242323624}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1369795236609626641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207374926871347302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07dec08330ff4ee4ea8547aa87140551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5342558495860005260
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,13 +57,13 @@ GameObject:
   - component: {fileID: 4538906268113617128}
   - component: {fileID: 2972285949871840694}
   - component: {fileID: 85485851246172064}
-  - component: {fileID: 6031526417806885927}
   - component: {fileID: 6893640640463776620}
   - component: {fileID: 5213346942864245966}
   - component: {fileID: 8775790911320702950}
   - component: {fileID: 5814333762172087240}
   - component: {fileID: 3609232577078713304}
   - component: {fileID: 8538566341487336961}
+  - component: {fileID: 8594326269299877458}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -188,25 +201,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6031526417806885927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5342558495860005260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f988afe5d8fef134e997a09a84c493b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _prefab: {fileID: 3561084000588423045, guid: 21b91ea37d968284f940c652c3dea500, type: 3}
-  _poolCapacity: 20
-  _poolMaxSize: 20
-  _firePoint: {fileID: 1139960776618483336}
-  _projectileSpeed: 4
-  _fireRate: 3
-  _lifetime: 10
 --- !u!95 &6893640640463776620
 Animator:
   serializedVersion: 5
@@ -291,8 +285,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450f748cb1bdda840a77dd81b1a63995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotateToDirection: 1
-  _rotationSpeed: 360
   _angleOffset: -90
 --- !u!114 &8538566341487336961
 MonoBehaviour:
@@ -306,3 +298,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8ce3cf43591f449a18801a16a36004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _defaultDirection: {x: 0, y: 1, z: 0}
+--- !u!114 &8594326269299877458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5342558495860005260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ebbd5e9b6341ec4a9a5a0ae0a46b36f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _firePoint: {fileID: 1369795236609626641}
+  _fireInterval: 2
+  _fireStartDelay: 1

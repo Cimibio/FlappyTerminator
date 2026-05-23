@@ -2,52 +2,51 @@ using Spawners;
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Shooter))]
-public class TerminatorSpawner : Spawner<Terminator>
+public class TerminatorSpawner : CommandSpawner<Terminator>
 {
-    [SerializeField] private Transform _spawnPoint;
+    [SerializeField] private ProjectileSpawner _projectileSpawner;
 
     private Terminator _currentTerminator;
 
     public event Action TerminatorDied;
     public event Action<Terminator> TerminatorSpawned;
 
-    private void OnDisable()
+    protected override void OnObjectSpawned(Terminator terminator)
     {
-        if (_currentTerminator != null)
-            _currentTerminator.GameOver -= OnTerminatorDeath;
-    }
-
-    protected override void Spawn(Terminator terminator)
-    {
-        base.Spawn(terminator);
-        terminator.transform.position = _spawnPoint.position;
+        terminator.GameOver += OnTerminatorDeath;
         _currentTerminator = terminator;
         TerminatorSpawned?.Invoke(terminator);
-
-        terminator.GameOver += OnTerminatorDeath;
-    }
-
-    protected override void Despawn(Terminator terminator)
-    {
-        terminator.GameOver -= OnTerminatorDeath;
-        base.Despawn(terminator);
-
-        if (_currentTerminator == terminator)
-            _currentTerminator = null;
+        terminator.SetProjectileSpawner(_projectileSpawner);
     }
 
     public void SpawnNewTerminator()
     {
-        if (_currentTerminator != null)        
-            ReleaseToPool(_currentTerminator);        
+        if (_currentTerminator != null)
+        {
+            _currentTerminator.GameOver -= OnTerminatorDeath;
+            ReleaseToPool(_currentTerminator);
+        }
 
-        _currentTerminator = GetFromPool();
+        SpawnAtPoint();
     }
 
     private void OnTerminatorDeath()
     {
-        _currentTerminator.Reset();
+        if (_currentTerminator != null)
+            _currentTerminator.Reset();
+
         TerminatorDied?.Invoke();
+    }
+
+    public override void Reset()
+    {
+        if (_currentTerminator != null)
+        {
+            _currentTerminator.GameOver -= OnTerminatorDeath;
+            ReleaseToPool(_currentTerminator);
+            _currentTerminator = null;
+        }
+
+        base.Reset();
     }
 }

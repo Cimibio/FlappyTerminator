@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(CollisionDetector), typeof(EnemyAnimator), typeof(Collider2D))]
 [RequireComponent(typeof(Rigidbody2D), typeof(LifeTimer), typeof(Rotator))]
-[RequireComponent (typeof(Mover))]
+[RequireComponent (typeof(Mover), typeof(EnemyShooter))]
 public class Enemy : MonoBehaviour
 {
     private CollisionDetector _collisionDetector;
@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     private LifeTimer _lifeTimer;
     private Rotator _rotator;
     private Mover _enemyMover;
+    private EnemyShooter _enemyShooter;
 
     public event Action<Enemy> Died;
 
@@ -25,12 +26,13 @@ public class Enemy : MonoBehaviour
         _lifeTimer = GetComponent<LifeTimer>();
         _rotator = GetComponent<Rotator>();
         _enemyMover = GetComponent<Mover>();
+        _enemyShooter = GetComponent<EnemyShooter>();
     }
 
     private void Start()
     {
         _collider.isTrigger = false;
-        _rigidbody.bodyType = RigidbodyType2D.Kinematic;
+        _rigidbody.bodyType = RigidbodyType2D.Kinematic;               
     }
 
     private void OnEnable()
@@ -47,13 +49,14 @@ public class Enemy : MonoBehaviour
         _lifeTimer.Expired -= Die;
     }
 
-    public void Init(Vector2 direction, float speed, float lifetime)
+    public void Init(Vector2 direction, float speed, float lifetime, RocketSpawner rocketSpawner)
     {
         _lifeTimer.StartTimer(lifetime);
         _enemyMover.SetDirection(speed);
         _rotator.SetDirection(direction);
+        _enemyShooter.SetRocketSpawner(rocketSpawner);
         _collider.enabled = true;
-    }
+    }    
 
     private void Die()
     {

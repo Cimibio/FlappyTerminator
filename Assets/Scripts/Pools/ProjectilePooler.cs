@@ -1,0 +1,1 @@
+public class ProjectilePooler : ObjectPooler<Projectile> { }

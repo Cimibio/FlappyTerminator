@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Game : MonoBehaviour
@@ -7,7 +6,7 @@ public class Game : MonoBehaviour
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private StartScreen _startScreen;
     [SerializeField] private EndGameScreen _endGameScreen;
-    [SerializeField] private TerminatorTracker _tracker;
+    [SerializeField] private TerminatorTracker _terminatorTracker;
 
     private bool _isGameActive = false;
 
@@ -33,11 +32,6 @@ public class Game : MonoBehaviour
         _startScreen.Open();
     }
 
-    private void SetTrackingTarget(Terminator terminator)
-    {
-        _tracker.SetTarget(terminator);
-    }
-
     private void OnTerminatorDied()
     {
         if (!_isGameActive) 
@@ -46,8 +40,7 @@ public class Game : MonoBehaviour
         _isGameActive = false;
         Time.timeScale = 0;
         _endGameScreen.Open();
-
-        _enemySpawner.Reset();
+        _enemySpawner.StopSpawning();
     }
 
     private void OnRestartButtonClick()
@@ -67,8 +60,15 @@ public class Game : MonoBehaviour
         _isGameActive = true;
         Time.timeScale = 1;
 
-        _terminatorSpawner.SpawnNewTerminator();
+        _terminatorSpawner.Reset();
+        _enemySpawner.Reset();
 
+        _terminatorSpawner.SpawnNewTerminator();
         _enemySpawner.StartSpawning();
+    }
+
+    private void SetTrackingTarget(Terminator terminator)
+    {
+        _terminatorTracker.SetTarget(terminator);
     }
 }
