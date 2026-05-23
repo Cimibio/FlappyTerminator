@@ -4,6 +4,8 @@ public class Game : MonoBehaviour
 {
     [SerializeField] private TerminatorSpawner _terminatorSpawner;
     [SerializeField] private EnemySpawner _enemySpawner;
+    [SerializeField] private RocketSpawner _rocketSpawner;
+    [SerializeField] private ProjectileSpawner _projectileSpawner;
     [SerializeField] private StartScreen _startScreen;
     [SerializeField] private EndGameScreen _endGameScreen;
     [SerializeField] private TerminatorTracker _terminatorTracker;
@@ -62,6 +64,8 @@ public class Game : MonoBehaviour
 
         _terminatorSpawner.Reset();
         _enemySpawner.Reset();
+        _rocketSpawner.Reset();
+        _projectileSpawner.Reset();
 
         _terminatorSpawner.SpawnNewTerminator();
         _enemySpawner.StartSpawning();

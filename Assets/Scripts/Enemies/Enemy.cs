@@ -60,8 +60,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        _lifeTimer.StopTimer();
-        _enemyMover.ResetMovement();
+        ResetEnemy();
         _animator.PlayExplosionAnimation();
         _collider.enabled = false;
     }
@@ -71,5 +70,13 @@ public class Enemy : MonoBehaviour
         _rotator.ResetRotation();
         Debug.Log($"[{gameObject.name}] Died!");
         Died?.Invoke(this);
+    }
+
+    private void ResetEnemy()
+    {
+        _lifeTimer.StopTimer();
+        _rotator.ResetRotation();
+        _enemyMover.ResetMovement();
+        _enemyShooter.StopAllCoroutines();
     }
 }

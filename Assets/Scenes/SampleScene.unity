@@ -749,6 +749,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _terminatorSpawner: {fileID: 433451460}
   _enemySpawner: {fileID: 649466302}
+  _rocketSpawner: {fileID: 2117271949}
+  _projectileSpawner: {fileID: 2140838268}
   _startScreen: {fileID: 1825567880}
   _endGameScreen: {fileID: 1483598709}
   _terminatorTracker: {fileID: 519420033}

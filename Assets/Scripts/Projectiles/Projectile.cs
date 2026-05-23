@@ -35,8 +35,6 @@ public class Projectile : MonoBehaviour
 
     public void Init(Vector2 direction, float speed, float lifetime)
     {
-        //Vector2 velocity = direction.normalized * speed;
-
         _lifeTimer.StartTimer(lifetime);
         _mover.SetDirection(speed);
         _rotator.SetDirection(direction);
@@ -44,6 +42,7 @@ public class Projectile : MonoBehaviour
 
     private void Die()
     {
+        ResetProjectile();
         Died?.Invoke(this);
     }
 
