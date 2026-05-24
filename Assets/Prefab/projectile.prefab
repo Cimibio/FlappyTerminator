@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8ce3cf43591f449a18801a16a36004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _defaultDirection: {x: 0, y: 1, z: 0}
 --- !u!114 &4007852833420410549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,7 +119,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 31d8a46be10bcd3409183a6525fc1635, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e44677af3ec0e16498e3d15dc2458f0f, type: 3}
   m_Color: {r: 0.8415094, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -188,6 +189,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450f748cb1bdda840a77dd81b1a63995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotateToDirection: 1
-  _rotationSpeed: 360
   _angleOffset: -90

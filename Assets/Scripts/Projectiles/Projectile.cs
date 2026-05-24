@@ -41,11 +41,6 @@ public class Projectile : MonoBehaviour
         _rotator.SetDirection(direction);
     }
 
-    private void Die()
-    {
-        Died?.Invoke(this);
-    }
-
     public void ResetState()
     {
         Died = null;
@@ -53,5 +48,10 @@ public class Projectile : MonoBehaviour
         _mover.ResetMovement();
         _rotator.ResetRotation();
         _lifeTimer.StopTimer();
+    }
+
+    private void Die()
+    {
+        Died?.Invoke(this);
     }
 }

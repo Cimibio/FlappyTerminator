@@ -41,11 +41,6 @@ public class Rocket : MonoBehaviour
         _rotator.SetDirection(direction);
     }
 
-    private void Die()
-    {
-        Died?.Invoke(this);
-    }
-
     public void ResetState()
     {
         Died = null;
@@ -53,5 +48,10 @@ public class Rocket : MonoBehaviour
         _lifeTimer.StopTimer();
         _mover.ResetMovement();
         _rotator.ResetRotation();
+    }
+
+    private void Die()
+    {
+        Died?.Invoke(this);
     }
 }
