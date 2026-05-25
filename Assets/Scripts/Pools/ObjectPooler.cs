@@ -12,6 +12,27 @@ public abstract class ObjectPooler<T> : MonoBehaviour where T : MonoBehaviour
     protected ObjectPool<T> Pool;
     protected List<T> _activeObjects = new List<T>();
 
+    public T Get()
+    {
+        return Pool.Get();
+    }
+
+    public void Release(T obj)
+    {
+        Pool.Release(obj);
+    }
+
+    public void ReturnAllToPool()
+    {
+        for (int i = _activeObjects.Count - 1; i >= 0; i--)
+        {
+            if (_activeObjects[i] != null)
+                Release(_activeObjects[i]);
+        }
+
+        _activeObjects.Clear();
+    }
+
     protected virtual void Awake()
     {
         InitializePool();
@@ -45,26 +66,5 @@ public abstract class ObjectPooler<T> : MonoBehaviour where T : MonoBehaviour
     {
         _activeObjects.Remove(obj);
         obj.gameObject.SetActive(false);
-    }
-
-    public T Get()
-    {
-        return Pool.Get();
-    }
-
-    public void Release(T obj)
-    {
-        Pool.Release(obj);
-    }
-
-    public void ReturnAllToPool()
-    {
-        for (int i = _activeObjects.Count - 1; i >= 0; i--)
-        {
-            if (_activeObjects[i] != null)
-                Release(_activeObjects[i]);
-        }
-
-        _activeObjects.Clear();
     }
 }

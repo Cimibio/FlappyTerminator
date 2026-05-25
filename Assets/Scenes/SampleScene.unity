@@ -521,7 +521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectPooler: {fileID: 279173425}
   _spawnPoint: {fileID: 1982754064}
-  _projectileSpawner: {fileID: 2140838268}
+  _projectileSpawner: {fileID: 0}
 --- !u!1 &499193615
 GameObject:
   m_ObjectHideFlags: 0
@@ -1669,7 +1669,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectPooler: {fileID: 1269638151}
   _spawnPoint: {fileID: 0}
-  _rocketSpeed: 5
+  _projectileSpeed: 10
   _lifetime: 5
 --- !u!1 &2140838266
 GameObject:
@@ -1712,12 +1712,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2140838266}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b02c8e3ac403b0a468c033d229217600, type: 3}
+  m_Script: {fileID: 11500000, guid: f24b39018927c3247ac52e15e28ea1b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _objectPooler: {fileID: 1265899669}
   _spawnPoint: {fileID: 0}
-  _projectileSpeed: 10
+  _projectileSpeed: 20
   _lifetime: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

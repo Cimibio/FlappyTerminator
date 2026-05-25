@@ -22,14 +22,14 @@ public abstract class BaseProjectile<T> : MonoBehaviour where T : BaseProjectile
 
     private void OnEnable()
     {
-        _collisionDetector.Collided += Die;
-        _lifeTimer.Expired += Die;
+        _collisionDetector.Collided += InformDeath;
+        _lifeTimer.Expired += InformDeath;
     }
 
     private void OnDisable()
     {
-        _collisionDetector.Collided -= Die;
-        _lifeTimer.Expired -= Die;
+        _collisionDetector.Collided -= InformDeath;
+        _lifeTimer.Expired -= InformDeath;
 
         ResetState();
     }
@@ -50,7 +50,7 @@ public abstract class BaseProjectile<T> : MonoBehaviour where T : BaseProjectile
         _lifeTimer.StopTimer();
     }
 
-    private void Die()
+    private void InformDeath()
     {
         Died?.Invoke((T)this);
     }

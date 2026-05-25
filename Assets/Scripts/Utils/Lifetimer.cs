@@ -30,10 +30,9 @@ public class LifeTimer : MonoBehaviour
         }
     }
 
-    private IEnumerator Countdown(float delay)
+    private IEnumerator Countdown(float lifetime)
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(lifetime);
         Expired?.Invoke();
     }
-
 }

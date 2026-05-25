@@ -12,6 +12,12 @@ namespace Spawners
                 _objectPooler = GetComponent<ObjectPooler<T>>();
         }
 
+        public void ReturnAllToPool()
+        {
+            if (_objectPooler != null)
+                _objectPooler.ReturnAllToPool();
+        }
+
         protected T GetFromPool()
         {
             if (_objectPooler == null)
@@ -27,17 +33,6 @@ namespace Spawners
         {
             if (_objectPooler != null && obj != null)
                 _objectPooler.Release(obj);
-        }
-
-        public void ReturnAllToPool()
-        {
-            if (_objectPooler != null)
-                _objectPooler.ReturnAllToPool();
-        }
-
-        public void SetObjectPooler(ObjectPooler<T> pooler)
-        {
-            _objectPooler = pooler;
         }
     }
 }

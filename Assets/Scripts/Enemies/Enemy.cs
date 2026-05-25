@@ -38,16 +38,16 @@ public class Enemy : MonoBehaviour
 
     private void OnEnable()
     {        
-        _animator.EnemyExplosionAnimationCompleted += Remove;
+        _animator.EnemyExplosionAnimationCompleted += InformReleaseReady;
         _collisionDetector.Collided += Explode;
-        _lifeTimer.Expired += Remove;
+        _lifeTimer.Expired += InformReleaseReady;
     }
 
     private void OnDisable()
     {
-        _animator.EnemyExplosionAnimationCompleted -= Remove;
+        _animator.EnemyExplosionAnimationCompleted -= InformReleaseReady;
         _collisionDetector.Collided -= Explode;
-        _lifeTimer.Expired -= Remove;
+        _lifeTimer.Expired -= InformReleaseReady;
 
         ResetState();
     }
@@ -80,7 +80,7 @@ public class Enemy : MonoBehaviour
         _collider.enabled = false;
     }
 
-    private void Remove()
+    private void InformReleaseReady()
     {
         Debug.Log($"[{gameObject.name}] Died!");
         Died?.Invoke(this);

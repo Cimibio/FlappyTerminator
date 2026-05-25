@@ -6,8 +6,6 @@ namespace Spawners
     {
         [SerializeField] protected Transform _spawnPoint;
 
-        protected abstract void OnObjectSpawned(T obj);
-
         public virtual void SpawnAtSpawnPoint()
         {
             if (_spawnPoint == null)
@@ -23,7 +21,7 @@ namespace Spawners
         {
             T obj = GetFromPool();
 
-            if (obj == null) 
+            if (obj == null)
                 return;
 
             obj.transform.position = position;
@@ -34,5 +32,7 @@ namespace Spawners
         {
             ReturnAllToPool();
         }
+
+        protected virtual void OnObjectSpawned(T obj) { }
     }
 }

@@ -1,3 +1,3 @@
 using UnityEngine;
 
-public class FirePoint : MonoBehaviour {    }
+public class FirePoint : MonoBehaviour { }

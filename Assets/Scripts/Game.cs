@@ -21,7 +21,7 @@ public class Game : MonoBehaviour
 
         _startScreen.PlayButtonClicked += OnPlayButtonClick;
         _endGameScreen.RestartButtonClicked += OnRestartButtonClick;
-        _terminatorSpawner.TerminatorDied += OnTerminatorDied;
+        _terminatorSpawner.TerminatorDied += FreezeGame;
         _terminatorSpawner.TerminatorSpawned += SetTrackingTarget;
         _enemySpawner.Scored += AddScore;
     }
@@ -30,7 +30,7 @@ public class Game : MonoBehaviour
     {
         _startScreen.PlayButtonClicked -= OnPlayButtonClick;
         _endGameScreen.RestartButtonClicked -= OnRestartButtonClick;
-        _terminatorSpawner.TerminatorDied -= OnTerminatorDied;
+        _terminatorSpawner.TerminatorDied -= FreezeGame;
         _terminatorSpawner.TerminatorSpawned -= SetTrackingTarget;
         _enemySpawner.Scored -= AddScore;
     }
@@ -41,7 +41,7 @@ public class Game : MonoBehaviour
         _startScreen.Open();
     }
 
-    private void OnTerminatorDied()
+    private void FreezeGame()
     {
         if (!_isGameActive) 
             return;

@@ -29,7 +29,7 @@ public class EnemySpawner : PeriodicSpawner<Enemy>
             return;
 
         enemy.Died += Remove;
-        enemy.Destroyed += InformDestruction;
+        enemy.Destroyed += InformScore;
         enemy.transform.position = GetRandomSpawnPoint();
         enemy.Init(_startVector, _enemySpeed, _lifetime, _rocketSpawner);
     }
@@ -47,13 +47,13 @@ public class EnemySpawner : PeriodicSpawner<Enemy>
 
     private void Remove(Enemy enemy)
     {
-        enemy.Destroyed -= InformDestruction;
+        enemy.Destroyed -= InformScore;
         enemy.Died -= Remove;
         enemy.ResetState();
         ReleaseToPool(enemy);
     }
 
-    private void InformDestruction()
+    private void InformScore()
     {
         Scored?.Invoke();
     }
