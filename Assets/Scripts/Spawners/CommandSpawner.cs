@@ -6,6 +6,8 @@ namespace Spawners
     {
         [SerializeField] protected Transform _spawnPoint;
 
+        protected abstract void OnObjectSpawned(T obj);
+
         public virtual void SpawnAtSpawnPoint()
         {
             if (_spawnPoint == null)
@@ -27,8 +29,6 @@ namespace Spawners
             obj.transform.position = position;
             OnObjectSpawned(obj);
         }
-
-        protected abstract void OnObjectSpawned(T obj);
 
         public virtual void Reset()
         {

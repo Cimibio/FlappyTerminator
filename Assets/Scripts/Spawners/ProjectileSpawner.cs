@@ -6,11 +6,7 @@ public class ProjectileSpawner : CommandSpawner<Projectile>
     [SerializeField] private float _projectileSpeed = 10f;
     [SerializeField] private float _lifetime = 5f;
 
-    protected override void OnObjectSpawned(Projectile projectile)
-    {
-        //Vector2 direction = _spawnPoint.up;
-        //projectile.Init(direction, _projectileSpeed, _lifetime);
-    }
+    protected override void OnObjectSpawned(Projectile projectile) { }
 
     public void ShootFromPoint(Transform firePoint)
     {
