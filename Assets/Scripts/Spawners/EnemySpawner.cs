@@ -28,6 +28,7 @@ public class EnemySpawner : PeriodicSpawner<Enemy>
         if (enemy == null) 
             return;
 
+        enemy.ResetState();
         enemy.transform.position = GetRandomSpawnPoint();
         enemy.Init(_startVector, _enemySpeed, _lifetime, _rocketSpawner);
     }

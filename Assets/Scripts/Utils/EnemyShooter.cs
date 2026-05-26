@@ -19,11 +19,6 @@ public class EnemyShooter : MonoBehaviour
         _repeatRateWait = new WaitForSeconds(_fireInterval);
     }
 
-    private void OnDisable()
-    {
-        StopShooting();
-    }
-
     public void SetRocketSpawner(RocketSpawner spawner)
     {
         StopShooting();

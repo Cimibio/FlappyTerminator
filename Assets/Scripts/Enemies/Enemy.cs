@@ -48,8 +48,6 @@ public class Enemy : MonoBehaviour
         _animator.EnemyExplosionAnimationCompleted -= InformReleaseReady;
         _collisionDetector.Collided -= Explode;
         _lifeTimer.Expired -= InformReleaseReady;
-
-        ResetState();
     }
 
     public void Init(Vector2 direction, float speed, float lifetime, RocketSpawner rocketSpawner)

@@ -14,6 +14,12 @@ public class TerminatorMover : MonoBehaviour
     private Quaternion _maxRotation;
     private Quaternion _minRotation;
 
+    public void Reset()
+    {
+        transform.rotation = Quaternion.identity;
+        _rigidbody2D.velocity = Vector2.zero;
+    }
+
     private void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -27,12 +33,6 @@ public class TerminatorMover : MonoBehaviour
     private void Update()
     {
         transform.rotation = Quaternion.Lerp(transform.rotation, _minRotation, _rotationSpeed * Time.deltaTime);
-    }
-
-    public void Reset()
-    {
-        transform.rotation = Quaternion.identity;
-        _rigidbody2D.velocity = Vector2.zero;
     }
 
     public void Jump()

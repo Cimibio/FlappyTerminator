@@ -28,6 +28,11 @@ public class Terminator : MonoBehaviour
         _collisionDetector.Collided += ProcessCollision;
     }
 
+    private void OnDisable()
+    {
+        _collisionDetector.Collided -= ProcessCollision;
+    }
+
     private void Update()
     {
         if (_inputReader.IsJumpPressed)
@@ -35,11 +40,6 @@ public class Terminator : MonoBehaviour
 
         if (_inputReader.IsAttackPressed)
             _shooter.Shoot();
-    }
-
-    private void OnDisable()
-    {
-        _collisionDetector.Collided -= ProcessCollision;
     }
 
     public void ResetTerminator()
