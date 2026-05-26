@@ -28,10 +28,20 @@ public class EnemySpawner : PeriodicSpawner<Enemy>
         if (enemy == null) 
             return;
 
-        enemy.Died += Remove;
-        enemy.Destroyed += InformScore;
         enemy.transform.position = GetRandomSpawnPoint();
         enemy.Init(_startVector, _enemySpeed, _lifetime, _rocketSpawner);
+    }
+
+    protected override void SubscribeToEvents(Enemy enemy)
+    {
+        enemy.Died += Remove;
+        enemy.Destroyed += InformScore;
+    }
+
+    protected override void UnsubscribeFromEvents(Enemy enemy)
+    {
+        enemy.Died -= Remove;
+        enemy.Destroyed -= InformScore;
     }
 
     private Vector3 GetRandomSpawnPoint()
@@ -47,9 +57,6 @@ public class EnemySpawner : PeriodicSpawner<Enemy>
 
     private void Remove(Enemy enemy)
     {
-        enemy.Destroyed -= InformScore;
-        enemy.Died -= Remove;
-        enemy.ResetState();
         ReleaseToPool(enemy);
     }
 

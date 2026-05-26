@@ -30,21 +30,17 @@ public abstract class BaseProjectile<T> : MonoBehaviour where T : BaseProjectile
     {
         _collisionDetector.Collided -= InformDeath;
         _lifeTimer.Expired -= InformDeath;
-
-        ResetState();
     }
 
     public void Init(Vector2 direction, float speed, float lifetime)
     {
         _lifeTimer.StartTimer(lifetime);
-        _mover.SetDirection(speed);
+        _mover.InitMovement(speed);
         _rotator.SetDirection(direction);
     }
 
     public void ResetState()
     {
-        Died = null;
-
         _mover.ResetMovement();
         _rotator.ResetRotation();
         _lifeTimer.StopTimer();

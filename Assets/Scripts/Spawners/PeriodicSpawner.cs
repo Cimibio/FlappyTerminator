@@ -13,6 +13,18 @@ namespace Spawners
         protected WaitForSeconds _startDelayWait;
         protected WaitForSeconds _repeatRateWait;
 
+        public virtual void Reset()
+        {
+            StopSpawning();
+            ReturnAllToPool();
+        }
+
+        protected virtual void Start()
+        {
+            _startDelayWait = new WaitForSeconds(_startDelay);
+            _repeatRateWait = new WaitForSeconds(_repeatRate);
+        }
+
         public virtual void StartSpawning()
         {
             if (_spawnCoroutine == null && gameObject.activeInHierarchy)
@@ -31,20 +43,6 @@ namespace Spawners
                 _spawnCoroutine = null;
             }
         }
-
-        public virtual void Reset()
-        {
-            StopSpawning();
-            ReturnAllToPool();
-        }
-
-        protected virtual void Start()
-        {
-            _startDelayWait = new WaitForSeconds(_startDelay);
-            _repeatRateWait = new WaitForSeconds(_repeatRate);
-        }
-
-        protected abstract void SpawnObject();
 
         protected virtual IEnumerator SpawnRoutine()
         {

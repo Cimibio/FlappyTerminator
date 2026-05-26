@@ -6,6 +6,11 @@ namespace Spawners
     {
         [SerializeField] protected Transform _spawnPoint;
 
+        public virtual void Reset()
+        {
+            ReturnAllToPool();
+        }
+
         public virtual void SpawnAtSpawnPoint()
         {
             if (_spawnPoint == null)
@@ -14,25 +19,22 @@ namespace Spawners
                 return;
             }
 
-            SpawnAtPosition(_spawnPoint.position);
+            SpawnObject();
         }
 
-        public virtual void SpawnAtPosition(Vector3 position)
+        protected override void SpawnObject()
         {
             T obj = GetFromPool();
 
             if (obj == null)
                 return;
 
-            obj.transform.position = position;
             OnObjectSpawned(obj);
         }
 
-        public virtual void Reset()
+        protected virtual void OnObjectSpawned(T obj) 
         {
-            ReturnAllToPool();
+            obj.transform.position = _spawnPoint.position;
         }
-
-        protected virtual void OnObjectSpawned(T obj) { }
     }
 }

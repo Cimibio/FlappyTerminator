@@ -12,7 +12,7 @@ public class Terminator : MonoBehaviour
     private PlayerAnimator _animator;
     private Shooter _shooter;
 
-    public event Action GameOver;
+    public event Action Destroyed;
 
     private void Awake()
     {
@@ -55,7 +55,7 @@ public class Terminator : MonoBehaviour
 
     private void ProcessCollision()
     {
-        GameOver?.Invoke();
+        Destroyed?.Invoke();
         _animator.PlayExplosionAnimation();
     }
 }

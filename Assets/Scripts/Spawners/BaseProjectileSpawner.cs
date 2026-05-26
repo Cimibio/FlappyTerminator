@@ -19,7 +19,6 @@ public class BaseProjectileSpawner<T> : CommandSpawner<T> where T : BaseProjecti
         if (projectile == null)
             return;
 
-        projectile.Died += Remove;
         SetupProjectile(projectile, firePoint);
     }
 
@@ -32,13 +31,17 @@ public class BaseProjectileSpawner<T> : CommandSpawner<T> where T : BaseProjecti
 
     protected virtual void Remove(T projectile)
     {
-        var typedProjectile = projectile as T;
+        projectile.ResetState();
+        ReleaseToPool(projectile);
+    }
 
-        if (typedProjectile != null)
-        {
-            typedProjectile.ResetState();
-            typedProjectile.Died -= Remove;
-            ReleaseToPool(typedProjectile);
-        }
+    protected override void SubscribeToEvents(T projectile)
+    {
+        projectile.Died += Remove;
+    }
+
+    protected override void UnsubscribeFromEvents(T projectile)
+    {
+        projectile.Died -= Remove;
     }
 }

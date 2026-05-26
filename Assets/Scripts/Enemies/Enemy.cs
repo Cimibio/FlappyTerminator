@@ -55,7 +55,7 @@ public class Enemy : MonoBehaviour
     public void Init(Vector2 direction, float speed, float lifetime, RocketSpawner rocketSpawner)
     {
         _lifeTimer.StartTimer(lifetime);
-        _enemyMover.SetDirection(speed);
+        _enemyMover.InitMovement(speed);
         _rotator.SetDirection(direction);
         _enemyShooter.SetRocketSpawner(rocketSpawner);
         _collider.enabled = true;
@@ -63,13 +63,10 @@ public class Enemy : MonoBehaviour
 
     public void ResetState()
     {
-        Destroyed = null;
-        Died = null;
-
         _lifeTimer.StopTimer();
         _rotator.ResetRotation();
         _enemyMover.ResetMovement();
-        _enemyShooter.StopAllCoroutines();
+        _enemyShooter.StopShooting();
     }
 
     private void Explode()

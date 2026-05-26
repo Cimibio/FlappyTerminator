@@ -521,7 +521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectPooler: {fileID: 279173425}
   _spawnPoint: {fileID: 1982754064}
-  _projectileSpawner: {fileID: 0}
+  _projectileSpawner: {fileID: 2140838268}
 --- !u!1 &499193615
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,7 +735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 620bdcc2c26bc074a9b917ec3790fc74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _xOffset: 1
+  _xOffset: 5
   _terminator: {fileID: 1982754064}
 --- !u!114 &519420034
 MonoBehaviour:
@@ -1718,7 +1718,7 @@ MonoBehaviour:
   _objectPooler: {fileID: 1265899669}
   _spawnPoint: {fileID: 0}
   _projectileSpeed: 20
-  _lifetime: 5
+  _lifetime: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

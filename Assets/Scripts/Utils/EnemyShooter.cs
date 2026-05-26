@@ -11,6 +11,7 @@ public class EnemyShooter : MonoBehaviour
     private RocketSpawner _rocketSpawner;
     private WaitForSeconds _startDelayWait;
     private WaitForSeconds _repeatRateWait;
+    private bool _shooting = false;
 
     private void Awake()
     {
@@ -30,26 +31,30 @@ public class EnemyShooter : MonoBehaviour
         StartShooting();
     }
 
-    private void StartShooting()
-    {
-        if (_rocketSpawner != null && _fireCoroutine == null && gameObject.activeInHierarchy)        
-            _fireCoroutine = StartCoroutine(ShootRoutine());        
-    }
-
-    private void StopShooting()
+    public void StopShooting()
     {
         if (_fireCoroutine != null)
         {
             StopCoroutine(_fireCoroutine);
             _fireCoroutine = null;
         }
+
+        _shooting = false;
+    }
+
+    private void StartShooting()
+    {
+        if (_rocketSpawner != null && _fireCoroutine == null && gameObject.activeInHierarchy)        
+            _fireCoroutine = StartCoroutine(ShootRoutine());
+
+        _shooting = true;
     }
 
     private IEnumerator ShootRoutine()
     {
         yield return _startDelayWait;
 
-        while (true)
+        while (_shooting)
         {
             if (_rocketSpawner != null && _firePoint != null)            
                 _rocketSpawner.ShootFromPoint(_firePoint.transform);

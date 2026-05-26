@@ -13,7 +13,7 @@ public class Mover : MonoBehaviour
             transform.Translate(_defaultDirection * _speed * Time.deltaTime);
     }
 
-    public void SetDirection(float speed)
+    public void InitMovement(float speed)
     {
         _speed = speed;
         _isMoving = true;
